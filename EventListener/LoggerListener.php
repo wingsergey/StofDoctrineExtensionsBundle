@@ -4,40 +4,46 @@ namespace Stof\DoctrineExtensionsBundle\EventListener;
 
 use Gedmo\Loggable\LoggableListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
- * LoggableListener
+ * Sets the username from the security context by listening on kernel.request
  *
  * @author Christophe Coevoet <stof@notk.org>
  */
 class LoggerListener implements EventSubscriberInterface
 {
-    private $securityContext;
-
+    private $authorizationChecker;
+    private $tokenStorage;
     private $loggableListener;
 
-    public function __construct(LoggableListener $loggableListener, SecurityContextInterface $securityContext = null)
+    public function __construct(LoggableListener $loggableListener, TokenStorageInterface $tokenStorage = null, AuthorizationCheckerInterface $authorizationChecker = null)
     {
         $this->loggableListener = $loggableListener;
-        $this->securityContext = $securityContext;
+        $this->tokenStorage = $tokenStorage;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
-     * Set the username from the security context by listening on core.request
-     *
-     * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
+     * @internal
      */
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(RequestEvent $event)
     {
-        if (null === $this->securityContext) {
+        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
             return;
         }
 
-        $token = $this->securityContext->getToken();
-        if (null !== $token && $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (null === $this->tokenStorage || null === $this->authorizationChecker) {
+            return;
+        }
+
+        $token = $this->tokenStorage->getToken();
+
+        if (null !== $token && $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $this->loggableListener->setUsername($token);
         }
     }
