@@ -2,13 +2,25 @@
     "name": "wingsergey/stof-doctrine-extensions-bundle",
     "type": "symfony-bundle",
     "description": "Integration of the gedmo/doctrine-extensions with Symfony",
-    "keywords": ["tree", "behaviors", "doctrine2", "extensions", "gedmo", "sluggable","loggable", "translatable", "nestedset", "sortable", "timestampable"],
-    "homepage": "https://github.com/fintem/StofDoctrineExtensionsBundle",
+    "keywords": [
+        "tree",
+        "behaviors",
+        "doctrine2",
+        "extensions",
+        "gedmo",
+        "sluggable",
+        "loggable",
+        "translatable",
+        "nestedset",
+        "sortable",
+        "timestampable"
+    ],
+    "homepage": "https://github.com/stof/StofDoctrineExtensionsBundle",
     "license": "MIT",
     "authors": [
         {
-            "name": "Tomas Kmieliauskas",
-            "email": "tomas.kmieliauskas@fintem.lt"
+            "name": "Christophe Coevoet",
+            "email": "stof@notk.org"
         }
     ],
     "require": {
@@ -26,7 +38,9 @@
         "symfony/mime": "To use the Mime component integration for Uploadable"
     },
     "autoload": {
-        "psr-4": { "Stof\\DoctrineExtensionsBundle\\": "" }
+        "psr-4": {
+            "Stof\\DoctrineExtensionsBundle\\": ""
+        }
     },
     "extra": {
         "branch-alias": {
