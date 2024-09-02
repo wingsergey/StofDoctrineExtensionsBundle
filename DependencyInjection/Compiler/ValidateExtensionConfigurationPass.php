@@ -19,7 +19,7 @@ class ValidateExtensionConfigurationPass implements CompilerPassInterface
      *
      * @param ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container) : void
     {
         $container->getExtension('stof_doctrine_extensions')->configValidate($container);
     }

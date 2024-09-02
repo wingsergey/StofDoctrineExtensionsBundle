@@ -12,7 +12,7 @@ class Configuration implements ConfigurationInterface
      *
      * @return TreeBuilder
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder() : TreeBuilder
     {
         $treeBuilder = new TreeBuilder('stof_doctrine_extensions');
         if (\method_exists($treeBuilder, 'getRootNode')) {
