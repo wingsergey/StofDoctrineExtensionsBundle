@@ -1,8 +1,20 @@
 {
-    "name": "stof/doctrine-extensions-bundle",
+    "name": "wingsergey/doctrine-extensions-bundle",
     "type": "symfony-bundle",
     "description": "Integration of the gedmo/doctrine-extensions with Symfony",
-    "keywords": ["tree", "behaviors", "doctrine2", "extensions", "gedmo", "sluggable","loggable", "translatable", "nestedset", "sortable", "timestampable"],
+    "keywords": [
+        "tree",
+        "behaviors",
+        "doctrine2",
+        "extensions",
+        "gedmo",
+        "sluggable",
+        "loggable",
+        "translatable",
+        "nestedset",
+        "sortable",
+        "timestampable"
+    ],
     "homepage": "https://github.com/stof/StofDoctrineExtensionsBundle",
     "license": "MIT",
     "authors": [
@@ -30,16 +42,26 @@
         "symfony/phpunit-bridge": "^v6.4.1 || ^7.0.1",
         "symfony/security-core": "^5.4 || ^6.0 || ^7.0"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:wingsergey/DoctrineExtensions.git"
+        }
+    ],
     "suggest": {
         "doctrine/doctrine-bundle": "to use the ORM extensions",
         "doctrine/mongodb-odm-bundle": "to use the MongoDB ODM extensions",
         "symfony/mime": "To use the Mime component integration for Uploadable"
     },
     "autoload": {
-        "psr-4": { "Stof\\DoctrineExtensionsBundle\\": "src" }
+        "psr-4": {
+            "Stof\\DoctrineExtensionsBundle\\": "src"
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Stof\\DoctrineExtensionsBundle\\Tests\\": "tests" }
+        "psr-4": {
+            "Stof\\DoctrineExtensionsBundle\\Tests\\": "tests"
+        }
     },
     "extra": {
         "branch-alias": {
